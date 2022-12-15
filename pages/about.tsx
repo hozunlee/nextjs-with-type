@@ -1,11 +1,12 @@
-import { useState } from "react";
 import NavBar from "../components/NavBar";
 
-export default function Home() {
+const About = () => {
     return (
         <div>
             <NavBar />
-            <h1>hi</h1>
+            <div>배고픕니다.</div>
         </div>
     );
-}
+};
+
+export default About;
