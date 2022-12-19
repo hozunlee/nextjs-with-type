@@ -5,7 +5,6 @@ const NavBar = () => {
   const router = useRouter();
   return (
     <nav className="">
-      <img src="/pocaz.png" alt="" />
       <div>
         <Link href="/">
           <p className={router.pathname === '/' ? 'active' : ''}>Home</p>

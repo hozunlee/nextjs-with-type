@@ -4,7 +4,7 @@ import React from 'react';
 const Seo = ({ title }) => {
   return (
     <Head>
-      <title>{title} | next Movies</title>
+      <title>{`${title} | next Movies`}</title>
     </Head>
   );
 };

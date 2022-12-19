@@ -5,9 +5,8 @@ import Home from '../pages';
 import NavBar from './NavBar';
 import Seo from './Seo';
 
-const obj = { '/': 'Home', '/about': 'About' };
-
 const Layout = ({ children }) => {
+  const obj = { '/': 'Home', '/about': 'About' };
   const router = useRouter();
 
   return (
