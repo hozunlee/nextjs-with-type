@@ -5,23 +5,23 @@ import { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar';
 import Seo from '../components/Seo';
 
-export default function Home() {
+export default function Home({ results }) {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const {
-        data: { results },
-      } = await axios.get('/api/movies');
-      console.log(results);
-      setMovies(results);
-    })();
+    // (async () => {
+    //   const {
+    //     data: { results },
+    //   } = await axios.get('/api/movies');
+    console.log('res=>>>>', results);
+    setMovies(results);
+    // })();
   }, []);
 
   return (
     <div className="container">
       {/* <Seo title="Home" /> */}
-      {!movies && <h4>Loading...</h4>}
+      {/* {!movies && <h4>Loading...</h4>} */}
       <ul>
         {movies?.map((movie) => (
           <div className="movie" key={movie.id}>
@@ -54,4 +54,22 @@ export default function Home() {
       `}</style>
     </div>
   );
+}
+
+/**
+ * SSR
+ * page가 유저에게 보여지기 전에 props를 받아오는 fn
+ * @param params
+ * @returns {res}
+ */
+export async function getServerSideProps(params: type) {
+  const {
+    data: { results },
+  } = await axios.get('http://localhost:3000/api/movies');
+
+  return {
+    props: {
+      results,
+    },
+  };
 }
