@@ -8,22 +8,22 @@ import Seo from '../components/Seo';
 export default function Home({ results }) {
   const [movies, setMovies] = useState([]);
 
-  useEffect(() => {
-    // (async () => {
-    //   const {
-    //     data: { results },
-    //   } = await axios.get('/api/movies');
-    console.log('res=>>>>', results);
-    setMovies(results);
-    // })();
-  }, []);
+  // useEffect(() => {
+  //   // (async () => {
+  //   //   const {
+  //   //     data: { results },
+  //   //   } = await axios.get('/api/movies');
+  //   console.log('res=>>>>', results);
+  //   setMovies(results);
+  //   // })();
+  // }, []);
 
   return (
     <div className="container">
       {/* <Seo title="Home" /> */}
       {/* {!movies && <h4>Loading...</h4>} */}
       <ul>
-        {movies?.map((movie) => (
+        {results?.map((movie) => (
           <div className="movie" key={movie.id}>
             <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
             <h4>{movie.original_title}</h4>
@@ -37,6 +37,9 @@ export default function Home({ results }) {
           grid-template-columns: 1fr 1fr;
           padding: 20px;
           gap: 20px;
+        }
+        .movie {
+          cursor: pointer;
         }
         .movie img {
           max-width: 100%;
