@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import NavBar from '../components/NavBar';
@@ -20,7 +22,12 @@ interface IMovieProps {
 export default function Home({
   results,
 }: InferGetServerSidePropsType<GetServerSideProps>) {
-  const [movies, setMovies] = useState([]);
+  const router = useRouter();
+  const onClick = (id: number) => {
+    router.push(`/movies/${id}`);
+  };
+
+  // const [movies, setMovies] = useState([]);
 
   // useEffect(() => {
   //   // (async () => {
@@ -38,11 +45,20 @@ export default function Home({
       {/* {!movies && <h4>Loading...</h4>} */}
       <ul>
         {results?.map((movie: IMovieProps) => (
-          <div className="movie" key={movie.id}>
-            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
-            <h4>{movie.original_title}</h4>
-            <li>{movie.title}</li>
-          </div>
+          <Link
+            // onClick={() => onClick(movie.id)}
+            href={`/movies/${movie.id}`}
+            key={movie.id}
+          >
+            <div className="movie">
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              />
+              <h4>{movie.original_title}</h4>
+              <li>{movie.title}</li>
+            </div>
+            //{' '}
+          </Link>
         ))}
       </ul>
       <style jsx>{`
