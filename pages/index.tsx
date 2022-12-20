@@ -23,8 +23,18 @@ export default function Home({
   results,
 }: InferGetServerSidePropsType<GetServerSideProps>) {
   const router = useRouter();
-  const onClick = (id: number) => {
-    router.push(`/movies/${id}`);
+  const onClick = (id: number, title: string) => {
+    router.push(
+      {
+        pathname: `/movies/${id}`,
+        query: {
+          id,
+          title,
+        },
+      },
+      //marking URL for user
+      `/movies/${id}`
+    );
   };
 
   // const [movies, setMovies] = useState([]);
@@ -45,20 +55,20 @@ export default function Home({
       {/* {!movies && <h4>Loading...</h4>} */}
       <ul>
         {results?.map((movie: IMovieProps) => (
-          <Link
-            // onClick={() => onClick(movie.id)}
-            href={`/movies/${movie.id}`}
-            key={movie.id}
-          >
-            <div className="movie">
+          <div key={movie.id}>
+            <div
+              className="movie"
+              onClick={() => onClick(movie.id, movie.original_title)}
+            >
               <img
                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               />
-              <h4>{movie.original_title}</h4>
-              <li>{movie.title}</li>
+              <Link href={`/movies/${movie.id}`}>
+                <h4>{movie.original_title}</h4>
+                <li>{movie.vote_average}</li>
+              </Link>
             </div>
-            //{' '}
-          </Link>
+          </div>
         ))}
       </ul>
       <style jsx>{`
