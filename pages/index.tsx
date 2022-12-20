@@ -26,14 +26,10 @@ export default function Home({
   const onClick = (id: number, title: string) => {
     router.push(
       {
-        pathname: `/movies/${id}`,
-        query: {
-          id,
-          title,
-        },
-      },
+        pathname: `/movies/${title}/${id}`,
+      }
       //marking URL for user
-      `/movies/${id}`
+      // `/movies/${id}`
     );
   };
 
@@ -63,7 +59,7 @@ export default function Home({
               <img
                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               />
-              <Link href={`/movies/${movie.id}`}>
+              <Link href={`/movies/${movie.original_title}/${movie.id}`}>
                 <h4>{movie.original_title}</h4>
                 <li>{movie.vote_average}</li>
               </Link>
