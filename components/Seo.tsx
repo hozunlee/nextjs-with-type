@@ -1,7 +1,11 @@
 import Head from 'next/head';
 import React from 'react';
 
-const Seo = ({ title }) => {
+interface ITitleProps {
+  title: string;
+}
+
+const Seo = ({ title }: ITitleProps) => {
   return (
     <Head>
       <title>{`${title} | next Movies`}</title>

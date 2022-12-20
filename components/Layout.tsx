@@ -5,13 +5,20 @@ import Home from '../pages';
 import NavBar from './NavBar';
 import Seo from './Seo';
 
-const Layout = ({ children }) => {
-  const obj = { '/': 'Home', '/about': 'About' };
+interface ILayoutProps {
+  children: React.ReactNode;
+}
+type tPathObj = {
+  [key: string]: string;
+};
+
+const Layout = ({ children }: ILayoutProps) => {
+  const pathObj: tPathObj = { '/': 'Home', '/about': 'About' };
   const router = useRouter();
 
   return (
     <>
-      <Seo title={obj[router.pathname]} />
+      <Seo title={pathObj[router.pathname]} />
       <NavBar />
       <div>{children}</div>
     </>
