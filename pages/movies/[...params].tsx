@@ -1,10 +1,10 @@
 import Seo from 'components/Seo';
 import { useRouter } from 'next/router';
 
-const Detail = () => {
+const Detail = ({ params }) => {
   const router = useRouter();
   console.log('router :>> ', router);
-  const [title, id] = router.query.params ?? [];
+  const [title, id] = router.query.params ?? params;
   return (
     <div>
       <Seo title={title} />
@@ -15,3 +15,12 @@ const Detail = () => {
 };
 
 export default Detail;
+
+export function getServerSideProps({
+  params: { params },
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  console.log('params :>> ', params);
+  return {
+    props: { params },
+  };
+}
